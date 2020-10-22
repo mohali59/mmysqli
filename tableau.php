@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+ 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
@@ -12,42 +12,74 @@
 <body>
                     <!--             formulaire ajouter          -->
                     <?php
+                    include ('crud.php');
                     if(isset($_GET["action"])&& $_GET["action"]=="ajout" && !empty($_POST) &&
-                   
                        isset($_POST["noemp"]) && !empty($_POST["noemp"]) &&
                        isset($_POST["noserv"]) && !empty($_POST["noserv"]))
-                       {
-                                                
-                        $query=<<<INSERT
-                       insert into emp values ({$_POST["noemp"]}, "{$_POST['nom']}", "{$_POST['prenom']}","{$_POST['emploi']}", {$_POST["sup"]}, "{$_POST['emb']}",
-                       {$_POST["sal"]}, {$_POST["comm"]}, {$_POST["noserv"]});
-                                
-INSERT;
-                      
-                      $mysqli= mysqli_init();
-                      mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
-                      $rs=mysqli_query($mysqli ,$query);
-                    }
+                       {    
+                         
+                        add($_POST["noemp"],$_POST['nom'],$_POST['prenom'],$_POST['emploi'],$_POST["sup"],$_POST['emb'],$_POST["sal"],$_POST["comm"],$_POST["noserv"]);
 
-                   
 
+
+
+
+
+
+
+
+
+
+
+
+
+                       
+                       }
                             //<!-- formulaire supprimer -->
                    
-                    if(isset($_GET["action"])&& $_GET["action"]=="supprimer" && isset($_GET["noemp"]))
-                    {
+                      if(isset($_GET["action"])&& $_GET["action"]=="supprimer" && isset($_GET["noemp"]))
+                      {
 
-                    $query=<<<SUPP
-                    delete from emp where noemp={$_GET["noemp"]};
-                    
+                      $query=<<<SUPP
+                      delete from emp where noemp={$_GET["noemp"]};  
 SUPP;
                       
                       $rs=mysqli_query($mysqli ,$query);
-                    }
-                    ?>
+                      }
+                    // form modification
+
+                    if(isset($_GET["action"])&& $_GET["action"]=="modifier" && isset($_GET["noemp"]))
+                        {             
+                        if( isset($_POST["noserv"]) && !empty($_POST["noserv"]))
+                        {
+                          $nom=$_POST["nom"];
+                          $prenom=$_POST["prenom"];
+                          $emploi=$_POST["emploi"];
+                          $sup=$_POST["sup"];
+                          $embauche=$_POST["embauche"];
+                          $sal=$_POST["sal"];
+                          $comm=$_POST["comm"];
+                          $noserv=$_POST["noserv"];
+
+                      $modifier="UPDATE `emp` SET `nom`='$nom',`prenom`='$prenom',`emploi`='$emploi',`sup`=$sup,`embauche`='$embauche',`sal`=$sal,`comm`=$comm,`noserv`=$noserv WHERE noemp=".$_GET["noemp"];
+                              echo $modifier;
+                              $mysqli= mysqli_init();
+                      mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
+                        if (mysqli_query($mysqli ,$modifier)){
+                          echo "modification ok";
+                        }
+                        else{
+                          echo "echec modification";
+                        }
+
+                       } 
+                      }
+                     ?>
 
                       <div>
                         <div style="position: relative; float: right;">
-                        <a href='formajout.php'> <button typr 'button' class='btn btn-primary' value='ajouter'>Ajouter</button> </a>
+                            <a href='formajout.php'> <button type='button' class='btn btn-primary' value='ajouter'>Ajouter</button> </a>
+                      </div>
                       </div>
                       <table class="table table-bordered">
                         <thead>
@@ -99,14 +131,9 @@ BUTMODIF;
 BOUTON;
                                           
                                           echo $bouton;
-            }
-        ?>
+                                         }
+                            ?>
 </table>
   
     </body>
 </html>
-
-
-
-
-
