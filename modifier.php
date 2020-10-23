@@ -15,9 +15,11 @@
 
        
        <?php
-       $mysqli= mysqli_init();
-       mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
+    //    $mysqli= mysqli_init();
+    //    mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
+
        $rs=mysqli_query($mysqli,"select*from emp where noemp=" .$_GET["noemp"]);
+
        $data=mysqli_fetch_array($rs,MYSQLI_ASSOC); //MYSQLI_ASSOC permet d afficher un tableau par personne avec tout les infos.
        mysqli_close($mysqli);
        mysqli_free_result($rs);
