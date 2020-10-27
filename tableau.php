@@ -13,64 +13,60 @@
 <body>
         <!--             formulaire ajouter          -->
         <?php
-        include ('crud.php');
-        if(isset($_GET["action"])&& $_GET["action"]=="ajout" && !empty($_POST) &&
-            isset($_POST["noemp"]) && !empty($_POST["noemp"]) &&
-            isset($_POST["noserv"]) && !empty($_POST["noserv"]))
-            {    
+            include ('crud.php');
+              if(isset($_GET["action"])&& $_GET["action"]=="ajout" && !empty($_POST) &&
+                  isset($_POST["noemp"]) && !empty($_POST["noemp"]) &&
+                  isset($_POST["noserv"]) && !empty($_POST["noserv"]))
+                  {    
+
+                    /* $nom = $_POST['nom']; mettre le dololar post "nom" dans une variable */
+
+                  add($_POST["noemp"],$_POST['nom'],$_POST['prenom'],$_POST['emploi'],$_POST["sup"],$_POST['emb'],$_POST["sal"],$_POST["comm"],$_POST["noserv"]);
+
+                  }
+                      //<!-- formulaire supprimer -->
               
-            add($_POST["noemp"],$_POST['nom'],$_POST['prenom'],$_POST['emploi'],$_POST["sup"],$_POST['emb'],$_POST["sal"],$_POST["comm"],$_POST["noserv"]);
+                if(isset($_GET["action"])&& $_GET["action"]=="supprimer" && isset($_GET["noemp"]))
+                {
+                  delete($_GET["noemp"]);
 
-
-            
-            }
-                //<!-- formulaire supprimer -->
-        
-          if(isset($_GET["action"])&& $_GET["action"]=="supprimer" && isset($_GET["noemp"]))
-          {
-            
-            delete($_GET["noemp"]);
-//                       $query=<<<SUPP
-//                       delete from emp where noemp={$_GET["noemp"]};  
-// SUPP;
-//                       $rs=mysqli_query($mysqli ,$query);
-          }
+      //                       $query=<<<SUPP
+      //                       delete from emp where noemp={$_GET["noemp"]};  
+      // SUPP;
+      //                       $rs=mysqli_query($mysqli ,$query);
+                }
 
 
         // form modification
 
         if(isset($_GET["action"])&& $_GET["action"]=="modifier" && isset($_GET["noemp"]))
-            {             
-            if( isset($_POST["noserv"]) && !empty($_POST["noserv"]))
-            {
-              $nom=$_POST["nom"];
-              $prenom=$_POST["prenom"];
-              $emploi=$_POST["emploi"];
-              $sup=$_POST["sup"];
-              $embauche=$_POST["embauche"];
-              $sal=$_POST["sal"];
-              $comm=$_POST["comm"];
-              $noserv=$_POST["noserv"];
+              {             
+                if( isset($_POST["noserv"]) && !empty($_POST["noserv"]))
+                {
+                  $nom=$_POST["nom"];
+                  $prenom=$_POST["prenom"];
+                  $emploi=$_POST["emploi"];
+                  $sup=$_POST["sup"];
+                  $embauche=$_POST["embauche"];
+                  $sal=$_POST["sal"];
+                  $comm=$_POST["comm"];
+                  $noserv=$_POST["noserv"];
+
+                  update($_GET["noemp"],$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv);
+             
+              // $modifier="UPDATE `emp` SET `nom`='$nom',`prenom`='$prenom',`emploi`='$emploi',`sup`=$sup,`embauche`='$embauche',`sal`=$sal,`comm`=$comm,`noserv`=$noserv WHERE noemp=".$_GET["noemp"];
+              //         echo $modifier;
+              //         $mysqli= mysqli_init();
+              // mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
+                // if (mysqli_query($mysqli ,$modifier)){
+                //   echo "modification ok";
+                // }
+                // else{
+                //   echo "echec modification";
+                // }
               
-              connectdb();
-              update($_GET["noemp"],$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv);
-              
-
-
-
-          // $modifier="UPDATE `emp` SET `nom`='$nom',`prenom`='$prenom',`emploi`='$emploi',`sup`=$sup,`embauche`='$embauche',`sal`=$sal,`comm`=$comm,`noserv`=$noserv WHERE noemp=".$_GET["noemp"];
-          //         echo $modifier;
-          //         $mysqli= mysqli_init();
-          // mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
-          //   if (mysqli_query($mysqli ,$modifier)){
-          //     echo "modification ok";
-          //   }
-          //   else{
-          //     echo "echec modification";
-          //   }
-          
+                }
             }
-          }
           ?>
 
           <div>
@@ -95,7 +91,7 @@
               </tr>
             </thead>
                 <?php
-                  $data= search();
+                  $data= searchAll();
 
                   foreach ($data as $value)
                   {

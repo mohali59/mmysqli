@@ -15,14 +15,19 @@
 
        
        <?php
+       include ('crud.php');
+       $data=search($_GET['noemp']);
+       print_r ($data);
     //    $mysqli= mysqli_init();
     //    mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
+    //    $mysqli = connectdb();
 
-       $rs=mysqli_query($mysqli,"select*from emp where noemp=" .$_GET["noemp"]);
+    //    $rs=mysqli_query($mysqli,"select*from emp where noemp=" .$_GET["noemp"]);
 
-       $data=mysqli_fetch_array($rs,MYSQLI_ASSOC); //MYSQLI_ASSOC permet d afficher un tableau par personne avec tout les infos.
-       mysqli_close($mysqli);
-       mysqli_free_result($rs);
+    //    $data=mysqli_fetch_array($rs,MYSQLI_ASSOC); //MYSQLI_ASSOC permet d afficher un tableau par personne avec tout les infos.
+    //    mysqli_close($mysqli);
+    //    mysqli_free_result($rs);
+
      
        ?>
                 <div>
@@ -60,7 +65,7 @@
                                      <label for="noserv">numéro de service</label>
                                     <input type="number" class="form-control" value="<?php echo $data["noserv"]; ?>" name="noserv" placeholder=""></input>
                                 </div>
-                                <input type="submit" class="btn btn-primary btn-lg btn-block"  value ="Modifier" />
+                                <input type="submit" class="btn btn-primary btn-lg btn-block"  value ="Modifier"/>
                       </div>
                             </form>
                 </div>

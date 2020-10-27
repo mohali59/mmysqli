@@ -18,15 +18,17 @@ INSERT;
 
     $mysqli = connectdb();  //connexion base de donnees
     mysqli_query($mysqli ,$query);
+    echo $query; //o affiche la requete sur m ecran pour pouvoir verifier ou le copier coller sur php my admin//
+
 }
              
 /////////////////////////////////////fonction supprimer////////////////////////////////////                  
 function delete ($noemp){
+    $mysqli = connectdb();  //connexion base de donnees
+
     $query=<<<SUPP
     delete from emp where noemp={$noemp};
 SUPP;
-    
-    $mysqli = connectdb();  //connexion base de donnees
 
     $rs=mysqli_query($mysqli ,$query);
 
@@ -35,24 +37,55 @@ SUPP;
 ///////////////////////////////////fonction modifier////////////////////////////////////
 
 function update($noemp,$nom,$prenom,$emploi,$sup,$emb,$sal,$comm,$noserv){
-    $modifier="UPDATE `emp` SET `nom`='$nom',`prenom`='$prenom',`emploi`='$emploi',`sup`=$sup,
-    `embauche`='$emb',`sal`=$sal,`comm`=$comm,`noserv`=$noserv WHERE noemp=".$_GET["noemp"];
-    echo $modifier;
+    $db = connectdb(); //connexion base de donnees 
+    $modifier="UPDATE `emp` 
+                SET `nom`='$nom',
+                    `prenom`='$prenom',
+                    `emploi`='$emploi',
+                    `sup`=$sup,
+                    `embauche`='$emb',
+                    `sal`=$sal,
+                    `comm`=$comm,
+                    `noserv`=$noserv 
+                WHERE noemp=".$_GET["noemp"];
     
-    $mysqli = connectdb(); //connexion base de donnees 
-
-    $rs=mysqli_query($mysqli ,$modifier);
+    if(mysqli_query($mysqli ,$modifier)){
+        echo"<script>alert('ok')</script>";
+    } else {
+        echo"<script>alert('dead')</script>";
+    }
 
 }
 
-//////////////////////////////fonction chercher employes////////////////////////////////////
+//////////////////////////////fonction chercher employes selon noemp////////////////////////////////////
 
-function search(){
+function search($noemp){
     $mysqli = connectdb();  //connexion base de donnees
 
     //Requete sql select tout les employes de la table emp
     $query=<<<SEARCH
-    SELECT * FROM emp WHERE noemp= $_GET["noemp"])
+    select * from emp where noemp={$noemp} ;
+
+SEARCH;
+
+    $rs = mysqli_query($mysqli ,$query);
+    $data=mysqli_fetch_array($rs,MYSQLI_ASSOC); //MYSQLI_ASSOC permet d afficher un tableau par personne avec tout les infos.
+    mysqli_close($mysqli);
+    mysqli_free_result($rs); // conseiller a faire pour liberer de l espace memoire
+
+    return $data;
+
+}
+
+
+//////////////////////////////fonction chercher tout les employes////////////////////////////////////
+
+function searchAll(){
+    $mysqli = connectdb();  //connexion base de donnees
+
+    //Requete sql select tout les employes de la table emp
+    $query=<<<SEARCH
+    select * from emp;
 
 SEARCH;
 
@@ -64,6 +97,19 @@ SEARCH;
     return $data;
 
 }
+
+//////////////////////////////fonction chercher sup////////////////////////////////////
+function searchSup()
+{
+    $db = connectdb();
+
+    $query= "SELECT `sup` FROM `emp`";
+
+    $rs=mysqli_query($mysqli ,$query);
+    return $data;
+    echo $query;
+}
+
 
 
 
