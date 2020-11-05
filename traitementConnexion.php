@@ -1,13 +1,14 @@
 <?php
-    session_start();
-        include("crud-utilisateur.php");
+session_start();
+include("crud-utilisateur.php");
+
 if (!empty($_POST)) {
     if  (isset($_POST["email"]) && !empty($_POST["email"]) && 
-        isset($_POST["password"]) && !empty($_POST["password"])) {
+         isset($_POST["password"]) && !empty($_POST["password"])) {
 
             $mail = $_POST["email"];
             $password = $_POST["password"];
-            $data=rechercheUtilisateur ($mail);
+            $data = rechercheUtilisateur($mail);
             if ($data) {
                 $passwordCorrect=password_verify($password, $data["password"]);
                 if ($passwordCorrect){

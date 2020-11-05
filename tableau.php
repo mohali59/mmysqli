@@ -52,7 +52,7 @@
                   $comm=$_POST["comm"];
                   $noserv=$_POST["noserv"];
 
-                  update($_GET["no_emp"],$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv);
+                  update($prenom,$nom,$emploi,$sup,$embauche,$sal,$comm,$noserv);
              
               // $modifier="UPDATE `emp` SET `nom`='$nom',`prenom`='$prenom',`emploi`='$emploi',`sup`=$sup,`embauche`='$embauche',`sal`=$sal,`comm`=$comm,`noserv`=$noserv WHERE no_emp=".$_GET["no_emp"];
               //         echo $modifier;

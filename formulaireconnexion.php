@@ -14,16 +14,16 @@
 <body>
 
 
-    <form class="tableau text-center m-5" action="traitementConnexion.php" method="post">
+<form class="tableau text-center m-5" action="traitementConnexion.php" method="post">
+    <div class="form-group text-center">
         <label for="formgr">Email :</label>
-         <input required class="form text-center" type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Saisir votre email"> <br/><br/>
-            <div class="form-group text-center">
-                <label for="inputPassword" class="col-form-label">Password :</label>
-
-            <input type="password" class=" text-centerform-control" id="inputPassword">
-
-            </div>
-        <input class="form text-center btn btn-primary" type="submit" value="Connexion"> 
+        <input required class="form text-center" type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Saisir votre email"> <br/><br/>
+    </div>    
+    <div class="form-group text-center">
+        <label for="inputPassword" class="col-form-label">Password :</label>
+        <input type="password" name="password" class=" text-centerform-control" id="inputPassword">
+    </div>
+    <input class="form text-center btn btn-primary" type="submit" value="Connexion"> 
 </form>
 
 </body>

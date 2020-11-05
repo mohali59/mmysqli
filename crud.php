@@ -4,7 +4,7 @@
 
 function connectdb(){
     $mysqli = mysqli_init();
-    mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise1');
+    mysqli_real_connect($mysqli,'localhost','root','','afpa_test');
     
     return $mysqli;
 }
@@ -13,7 +13,7 @@ function connectdb(){
 
 function add($no_emp,$nom,$prenom,$emploi,$sup,$emb,$sal,$comm,$noserv){
     $query=<<<INSERT
-      insert into employe values ({$no_emp},"{$nom}","{$prenom}","{$emploi}",{$sup},"{$emb}",{$sal},{$comm},{$noserv});
+      insert into employe values ({$no_emp},"{$nom}","{$prenom}","{$emploi}","{$emb}",{$sal},{$comm},{$noserv},{$sup}, null);
 INSERT;
 
     $mysqli = connectdb();  //connexion base de donnees
@@ -36,9 +36,9 @@ SUPP;
 
 ///////////////////////////////////fonction modifier////////////////////////////////////
 
-function update($no_emp,$nom,$prenom,$emploi,$sup,$emb,$sal,$comm,$noserv){
-    $db = connectdb(); //connexion base de donnees 
-    $modifier="UPDATE `emp` 
+function update($prenom,$nom,$emploi,$sup,$emb,$sal,$comm,$noserv){
+    $mysqli = connectdb(); //connexion base de donnees 
+    $modifier="UPDATE `employe` 
                 SET `nom`='$nom',
                     `prenom`='$prenom',
                     `emploi`='$emploi',
@@ -101,13 +101,11 @@ SEARCH;
 //////////////////////////////fonction chercher sup////////////////////////////////////
 function searchSup()
 {
-    $db = connectdb();
-
+    $mysqli = connectdb();
     $query= "SELECT `sup` FROM `employe`";
-
     $rs=mysqli_query($mysqli ,$query);
+    $data = mysqli_fetch_array($rs, MYSQLI_ASSOC);
     return $data;
-    echo $query;
 }
 
 

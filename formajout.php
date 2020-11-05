@@ -40,7 +40,7 @@
                                 </div>
                                 <div>
                                     <label for="enmauche">embauche</label>
-                                    <input type="date" class="form-control" name="emb" placeholder="jj/mm/aaaa"></input>
+                                    <input type="date" class="form-control" name="embauche" placeholder="jj/mm/aaaa"></input>
                                 </div>
                                 <div>
                                     <label for="sal">salaire</label>
