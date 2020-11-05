@@ -15,23 +15,23 @@
         <?php
             include ('crud.php');
               if(isset($_GET["action"])&& $_GET["action"]=="ajout" && !empty($_POST) &&
-                  isset($_POST["noemp"]) && !empty($_POST["noemp"]) &&
+                  isset($_POST["no_emp"]) && !empty($_POST["no_emp"]) &&
                   isset($_POST["noserv"]) && !empty($_POST["noserv"]))
                   {    
 
                     /* $nom = $_POST['nom']; mettre le dololar post "nom" dans une variable */
 
-                  add($_POST["noemp"],$_POST['nom'],$_POST['prenom'],$_POST['emploi'],$_POST["sup"],$_POST['emb'],$_POST["sal"],$_POST["comm"],$_POST["noserv"]);
+                  add($_POST["no_emp"],$_POST['nom'],$_POST['prenom'],$_POST['emploi'],$_POST["sup"],$_POST['embauche'],$_POST["sal"],$_POST["comm"],$_POST["noserv"]);
 
                   }
                       //<!-- formulaire supprimer -->
               
-                if(isset($_GET["action"])&& $_GET["action"]=="supprimer" && isset($_GET["noemp"]))
+                if(isset($_GET["action"])&& $_GET["action"]=="supprimer" && isset($_GET["no_emp"]))
                 {
-                  delete($_GET["noemp"]);
+                  delete($_GET["no_emp"]);
 
       //                       $query=<<<SUPP
-      //                       delete from emp where noemp={$_GET["noemp"]};  
+      //                       delete from emp where no_emp={$_GET["no_emp"]};  
       // SUPP;
       //                       $rs=mysqli_query($mysqli ,$query);
                 }
@@ -39,7 +39,7 @@
 
         // form modification
 
-        if(isset($_GET["action"])&& $_GET["action"]=="modifier" && isset($_GET["noemp"]))
+        if(isset($_GET["action"])&& $_GET["action"]=="modifier" && isset($_GET["no_emp"]))
               {             
                 if( isset($_POST["noserv"]) && !empty($_POST["noserv"]))
                 {
@@ -52,9 +52,9 @@
                   $comm=$_POST["comm"];
                   $noserv=$_POST["noserv"];
 
-                  update($_GET["noemp"],$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv);
+                  update($_GET["no_emp"],$nom,$prenom,$emploi,$sup,$embauche,$sal,$comm,$noserv);
              
-              // $modifier="UPDATE `emp` SET `nom`='$nom',`prenom`='$prenom',`emploi`='$emploi',`sup`=$sup,`embauche`='$embauche',`sal`=$sal,`comm`=$comm,`noserv`=$noserv WHERE noemp=".$_GET["noemp"];
+              // $modifier="UPDATE `emp` SET `nom`='$nom',`prenom`='$prenom',`emploi`='$emploi',`sup`=$sup,`embauche`='$embauche',`sal`=$sal,`comm`=$comm,`noserv`=$noserv WHERE no_emp=".$_GET["no_emp"];
               //         echo $modifier;
               //         $mysqli= mysqli_init();
               // mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
@@ -96,7 +96,7 @@
                   foreach ($data as $value)
                   {
                     echo "<tr>";
-                    echo "<td>".$value["noemp"]."</td>";
+                    echo "<td>".$value["no_emp"]."</td>";
                     echo "<td>".$value["nom"]."</td>";
                     echo "<td>".$value["prenom"]."</td>";
                     echo "<td>".$value["emploi"]."</td>";
@@ -108,13 +108,13 @@
                           // echo  "<td class='ajout'><a href='modifier.php'> <button typr 'button' class='btn btn-primary' value='modifier'>modifier</button> </a></td>";
                           
                     $butmodif=<<<BUTMODIF
-                    <td class='modifier'><a href='modifier.php?action=modifier&noemp={$value['noemp']}'>
+                    <td class='modifier'><a href='modifier.php?action=modifier&no_emp={$value['no_emp']}'>
                     <button type 'button' class='btn btn-primary' value='modifier'>modifier</button> </a></td>                          
 BUTMODIF;
                     echo $butmodif;
 
                     $bouton=<<<BOUTON
-                    <td class='supprimer'><a href='tableau.php?action=supprimer&noemp={$value['noemp']}'>
+                    <td class='supprimer'><a href='tableau.php?action=supprimer&no_emp={$value['no_emp']}'>
                     <button type 'button' class='btn btn-danger' value='supprimer'>supprimer</button> </a></td>
 BOUTON;                            
                     echo $bouton;

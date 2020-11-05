@@ -4,30 +4,30 @@
 
 function connectdb(){
     $mysqli = mysqli_init();
-    mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
+    mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise1');
     
     return $mysqli;
 }
 
 ////////////////////////////////////fonction ajouter////////////////////////////////// 
 
-function add($noemp,$nom,$prenom,$emploi,$sup,$emb,$sal,$comm,$noserv){
+function add($no_emp,$nom,$prenom,$emploi,$sup,$emb,$sal,$comm,$noserv){
     $query=<<<INSERT
-      insert into emp values ({$noemp},"{$nom}","{$prenom}","{$emploi}",{$sup},"{$emb}",{$sal},{$comm},{$noserv});
+      insert into employe values ({$no_emp},"{$nom}","{$prenom}","{$emploi}",{$sup},"{$emb}",{$sal},{$comm},{$noserv});
 INSERT;
 
     $mysqli = connectdb();  //connexion base de donnees
     mysqli_query($mysqli ,$query);
-    echo $query; //o affiche la requete sur m ecran pour pouvoir verifier ou le copier coller sur php my admin//
+    echo $query; //on affiche la requete sur l ecran pour pouvoir verifier ou le copier coller sur php my admin//
 
 }
              
 /////////////////////////////////////fonction supprimer////////////////////////////////////                  
-function delete ($noemp){
+function delete ($no_emp){
     $mysqli = connectdb();  //connexion base de donnees
 
     $query=<<<SUPP
-    delete from emp where noemp={$noemp};
+    delete from employe where no_emp={$no_emp};
 SUPP;
 
     $rs=mysqli_query($mysqli ,$query);
@@ -36,7 +36,7 @@ SUPP;
 
 ///////////////////////////////////fonction modifier////////////////////////////////////
 
-function update($noemp,$nom,$prenom,$emploi,$sup,$emb,$sal,$comm,$noserv){
+function update($no_emp,$nom,$prenom,$emploi,$sup,$emb,$sal,$comm,$noserv){
     $db = connectdb(); //connexion base de donnees 
     $modifier="UPDATE `emp` 
                 SET `nom`='$nom',
@@ -47,7 +47,7 @@ function update($noemp,$nom,$prenom,$emploi,$sup,$emb,$sal,$comm,$noserv){
                     `sal`=$sal,
                     `comm`=$comm,
                     `noserv`=$noserv 
-                WHERE noemp=".$_GET["noemp"];
+                WHERE no_emp=".$_GET["no_emp"];
     
     if(mysqli_query($mysqli ,$modifier)){
         echo"<script>alert('ok')</script>";
@@ -57,14 +57,14 @@ function update($noemp,$nom,$prenom,$emploi,$sup,$emb,$sal,$comm,$noserv){
 
 }
 
-//////////////////////////////fonction chercher employes selon noemp////////////////////////////////////
+//////////////////////////////fonction chercher employes selon no_emp////////////////////////////////////
 
-function search($noemp){
+function search($no_emp){
     $mysqli = connectdb();  //connexion base de donnees
 
     //Requete sql select tout les employes de la table emp
     $query=<<<SEARCH
-    select * from emp where noemp={$noemp} ;
+    select * from employe where no_emp={$no_emp} ;
 
 SEARCH;
 
@@ -85,7 +85,7 @@ function searchAll(){
 
     //Requete sql select tout les employes de la table emp
     $query=<<<SEARCH
-    select * from emp;
+    select * from employe;
 
 SEARCH;
 
@@ -103,12 +103,13 @@ function searchSup()
 {
     $db = connectdb();
 
-    $query= "SELECT `sup` FROM `emp`";
+    $query= "SELECT `sup` FROM `employe`";
 
     $rs=mysqli_query($mysqli ,$query);
     return $data;
     echo $query;
 }
+
 
 
 
