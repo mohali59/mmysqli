@@ -18,8 +18,8 @@
                 <div>
                            <form action="tableau.php?action=ajout" method="post">
                                 <div>
-                                <label for="noemp">noemp</label>
-                                <input type="text" class="form-control" name="noemp" placeholder=""></input>
+                                <label for="no_emp">no_emp</label>
+                                <input type="text" class="form-control" name="no_emp" placeholder=""></input>
                                 <div class="invalid-feedback">
                                 </div>
                                 

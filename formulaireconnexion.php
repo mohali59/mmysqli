@@ -14,7 +14,7 @@
 <body>
 
 
-    <form class="tableau text-center m-5" action= method="post">
+    <form class="tableau text-center m-5" action="traitementConnexion.php" method="post">
         <label for="formgr">Email :</label>
          <input required class="form text-center" type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Saisir votre email"> <br/><br/>
             <div class="form-group text-center">

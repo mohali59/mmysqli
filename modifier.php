@@ -16,13 +16,13 @@
        
        <?php
        include ('crud.php');
-       $data=search($_GET['noemp']);
+       $data=search($_GET['no_emp']);
        print_r ($data);
     //    $mysqli= mysqli_init();
     //    mysqli_real_connect($mysqli,'localhost','mohali','mohali59','entreprise');
     //    $mysqli = connectdb();
 
-    //    $rs=mysqli_query($mysqli,"select*from emp where noemp=" .$_GET["noemp"]);
+    //    $rs=mysqli_query($mysqli,"select*from emp where no_emp=" .$_GET["no_emp"]);
 
     //    $data=mysqli_fetch_array($rs,MYSQLI_ASSOC); //MYSQLI_ASSOC permet d afficher un tableau par personne avec tout les infos.
     //    mysqli_close($mysqli);
@@ -31,7 +31,7 @@
      
        ?>
                 <div>
-                <form action="tableau.php?action=modifier&noemp=<?php echo $data['noemp'];?>" method="post">
+                <form action="tableau.php?action=modifier&no_emp=<?php echo $data['no_emp'];?>" method="post">
                                 
                                 
                                 <div>
