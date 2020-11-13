@@ -3,7 +3,7 @@
 
 function ajoutUtilisateur(string $mail, string $password)
 {   
-    $mysqli=new mysqli('localhost','root','','afpa_test');
+    $mysqli=new mysqli('localhost','mohali','mohali59','entreprise1');
     if(!$stmt=$mysqli->prepare("INSERT into utilisateur  values (null, ?,?,'user')"))
         {
             echo $mysqli->error;
@@ -14,7 +14,7 @@ function ajoutUtilisateur(string $mail, string $password)
 }
 
 function rechercheUtilisateur(string $mail){
-    $mysqli=new mysqli('localhost','root','','afpa_test');
+    $mysqli=new mysqli('localhost','mohali','mohali59','entreprise1');
     $stmt = $mysqli->prepare("SELECT * from utilisateur where mail = ?");
     $stmt->bind_param("s",$mail);
     $stmt->execute();

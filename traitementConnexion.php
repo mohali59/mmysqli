@@ -6,21 +6,24 @@ if (!empty($_POST)) {
     if  (isset($_POST["email"]) && !empty($_POST["email"]) && 
          isset($_POST["password"]) && !empty($_POST["password"])) {
 
-            $mail = $_POST["email"];
-            $password = $_POST["password"];
+            $mail = $_POST["email"];  
             $data = rechercheUtilisateur($mail);
             if ($data) {
-                $passwordCorrect=password_verify($password, $data["password"]);
+                $passwordCorrect=password_verify($_POST["password"], $data["password"]);
+                $profil = $data["profil"];
                 if ($passwordCorrect){
-                    $_SESSION["mail"] = $email;
+                    $_SESSION["mail"] =$mail;
+                    $_SESSION["profil"] =$profil;
                     header("Location: tableau.php");
                 }
                 else{
-                    header("Location: formulaireconnexion.php");
+                    echo"invalide";
+                    // header("Location: formulaireconnexion.php");
                 }
              } 
              else{
-                 header ("Location: formulaireconnexion.php");
+                echo"mail invalide";
+                //  header ("Location: formulaireconnexion.php");
              }
                 
             }
