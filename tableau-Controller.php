@@ -140,23 +140,24 @@ if(!isset($_SESSION['mail']))
                 <?php
                 $newSearchAll=new EmployeService;
                 $data=$newSearchAll->searchAll();
+                var_dump ($data);
 
                   foreach ($data as $value)
                   {
                     echo "<tr>";
-                    echo "<td>".$value["no_emp"]."</td>";
-                    echo "<td>".$value["nom"]."</td>";
-                    echo "<td>".$value["prenom"]."</td>";
-                    echo "<td>".$value["emploi"]."</td>";
-                    echo "<td>".$value["sup"]."</td>";
-                    echo "<td>".$value["embauche"]."</td>";
+                    echo "<td>".$value->getNo_emp()."</td>";
+                    echo "<td>".$value->getNom() . "</td>";
+                    echo "<td>".$value->getPrenom()."</td>";
+                    echo "<td>".$value->getEmploi()."</td>";
+                    echo "<td>".$value->getSup()."</td>";
+                    echo "<td>".$value->getEmbauche()."</td>";
                     if ($_SESSION['profil']=='administrateur'){
 
-                    echo "<td>".$value["sal"]."</td>";
-                    echo "<td>".$value["comm"]."</td>";
+                    echo "<td>".$value->getSal()."</td>";
+                    echo "<td>".$value->getComm()."</td>";
                     }
                    
-                    echo "<td>".$value["noserv"]."</td>";
+                    echo "<td>".$value->getNoserv()."</td>";
                           // echo  "<td class='ajout'><a href='modifier.php'> <button typr 'button' class='btn btn-primary' value='modifier'>modifier</button> </a></td>";
                           
 
@@ -167,13 +168,13 @@ if(!isset($_SESSION['mail']))
                     if ($_SESSION['profil']=='administrateur'){
                             
                     $butmodif=<<<BUTMODIF
-                    <td class='modifier'><a href='modifier.php?action=modifier&no_emp={$value['no_emp']}'>
+                    <td class='modifier'><a href='modifier-Controller.php?action=modifier&no_emp={$value->getNo_emp()}'>
                     <button type 'button' class='btn btn-primary' value='modifier'>modifier</button> </a></td>                          
 BUTMODIF;
                     echo $butmodif;
 
                     $bouton=<<<BOUTON
-                    <td class='supprimer'><a href='tableau.php?action=supprimer&no_emp={$value['no_emp']}'>
+                    <td class='supprimer'><a href='tableau-Controller.php?action=supprimer&no_emp={$value->getNo_emp()}'>
                     <button type 'button' class='btn btn-danger' value='supprimer'>supprimer</button> </a></td>
 BOUTON;                            
                     echo $bouton;

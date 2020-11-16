@@ -25,7 +25,7 @@ if(!isset($_SESSION['mail']))
         
             <div>
                 <div>
-                           <form action="tableau.php?action=ajout" method="post">
+                           <form action="tableau-Controller.php?action=ajout" method="post">
                                 <div>
                                 <label for="no_emp">no_emp</label>
                                 <input type="text" class="form-control" name="no_emp" placeholder=""></input>

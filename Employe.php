@@ -26,7 +26,7 @@ class Employe{
     }
 
     
-    public function getNom():string 
+    public function getNom()
     {
         return $this->nom;
     }

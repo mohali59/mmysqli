@@ -14,7 +14,7 @@ if (!empty($_POST)) {
                 if ($passwordCorrect){
                     $_SESSION["mail"] =$mail;
                     $_SESSION["profil"] =$profil;
-                    header("Location: tableau.php");
+                    header("Location: tableau-Controller.php");
                 }
                 else{
                     echo"invalide";

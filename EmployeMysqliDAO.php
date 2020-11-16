@@ -67,9 +67,9 @@ class EmployeMysqliDAO{
             $comm=$updateEmploye->getComm();
             $noserv=$updateEmploye->getNoserv();
             $sup=$updateEmploye->getSup();
-            $stmt->bind_param("issssddii",$nom,$prenom, $emploi,$sup, $emb, $sal, $comm, $noserv, $no_emp);
+            $stmt->bind_param("sssisddii",$nom,$prenom, $emploi,$sup, $emb, $sal, $comm, $noserv, $no_emp);
             $stmt->execute();
-            var_dump ($updateEmploye);var_dump($stmt);
+           
             $mysqli->close();
             
     }  
@@ -80,13 +80,28 @@ class EmployeMysqliDAO{
         {
             echo $mysqli->error;
         }
+  
+
     $stmt->bind_param('i',$no_emp);
     $stmt->execute();
     $rs = $stmt->get_result();
     $data=$rs->fetch_array(MYSQLI_ASSOC);
+    $research=new Employe();
+    $research->setNo_emp($data["no_emp"])
+             ->setNom($data['nom'])
+             ->setPrenom($data['prenom'])
+             ->setEmploi($data['emploi'])
+             ->setSup($data["sup"])
+             ->setEmbauche($data["embauche"])
+             ->setSal($data["sal"])
+             ->setComm($data["comm"])
+             ->setNoserv($data["noserv"]);
+    
     $mysqli->close();
-    return $data;
+    return $research;
+
 }
+
 
 function searchAll()
 {   
@@ -99,9 +114,26 @@ function searchAll()
     $stmt->execute();
     $rs = $stmt->get_result();
     $data=$rs->fetch_all(MYSQLI_ASSOC);
+    $tableau=[];  //creation d un tableau vide
+    foreach ($data as $key => $value) 
+    {
+    $research=new Employe();
+    $research->setNo_emp($value["no_emp"])
+             ->setNom($value['nom'])
+             ->setPrenom($value['prenom'])
+             ->setEmploi($value['emploi'])
+             ->setSup($value["sup"])
+             ->setEmbauche($value["embauche"])
+             ->setSal($value["sal"])
+             ->setComm($value["comm"])
+             ->setNoserv($value["noserv"]);
+             
+            $tableau[]=$research; //permet de remplir un"tableau" vide ave des objets qu on viens de creer//
+    }
+
     $rs->free();
     $mysqli->close();
-    return $data;
+    return $tableau;
     }
 
     
