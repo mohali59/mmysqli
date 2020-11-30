@@ -57,10 +57,15 @@ if(!isset($_SESSION['mail']))
                         ->setComm(empty($_POST["comm"]) ? NULL:$_POST["comm"])
                         ->setNoserv(empty($_POST["noserv"]) ? NULL:$_POST["noserv"])
                         ->setSup(empty($_POST["sup"]) ? NULL: $_POST["sup"]);
-                         var_dump ($employe);
+                       
                         $employeService = new EmployeService;
+                        try{
                         $employeService->addEmploye($employe);
-                
+                      }
+                      catch(ServiceException $e){
+                      echo $e->getMessage();
+                      echo $e->getCode();
+                    }
                   }
 
                       //<!-- formulaire supprimer -->
@@ -68,7 +73,15 @@ if(!isset($_SESSION['mail']))
                 if(isset($_GET["action"])&& $_GET["action"]=="supprimer" && isset($_GET["no_emp"]))
                 {
                 $deleteEmployeService = new EmployeService;
+                try{
                 $deleteEmployeService->delete($_GET["no_emp"]);
+              }
+              catch(ServiceException $e){
+                echo $e->getMessage();
+                echo $e->getCode();
+              }
+
+              
 
                 // $deleteEmploye=new Employe;
                 // $deleteEmploye->delete($_GET["no_emp");
@@ -95,8 +108,13 @@ if(!isset($_SESSION['mail']))
 
                   
                   $updateEmployeService = new EmployeService;
-                  $updateEmployeService->update($updateEmploye);
-                      var_dump($updateEmploye);
+                  try{
+                      $updateEmployeService->update($updateEmploye);
+                    }
+                    catch(ServiceException $e){
+                      echo $e->getMessage();
+                      echo $e->getCode();
+                    }
                 }
                 
             }
@@ -140,7 +158,7 @@ if(!isset($_SESSION['mail']))
                 <?php
                 $newSearchAll=new EmployeService;
                 $data=$newSearchAll->searchAll();
-                var_dump ($data);
+               
 
                   foreach ($data as $value)
                   {

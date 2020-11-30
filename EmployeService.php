@@ -1,32 +1,51 @@
 <?php
 require_once("EmployeMysqliDAO.php");
 require_once("Employe.php");
+require_once('ServiceException.php');
+require_once('ServiceException.php');
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 class EmployeService
 {
 public  function addEmploye(Employe $employe){
 $emp= new EmployeMysqliDAO();
-$emp-> addEmploye($employe);
 
+
+    try{
+    $emp-> addEmploye($employe);
+    }
+    catch (DAOException $e){
+    throw new ServiceException($e->getMessage(),$e->getcode());
+    }
 }
-public  function delete(int $no_emp){
 
+public function delete(int $no_emp){
     $delEmp=new EmployeMysqliDAO();
-    $delEmp->delete($no_emp);
+
+    try{
+        $delEmp->delete($no_emp);
+    }
+        catch (DAOException $e){
+            throw new ServiceException($e->getMessage(), $e->getCode());
+    }
 
 }
 
-public  function update(Employe $employe)
-{
-
+public  function update(Employe $employe){
     $updt=new EmployeMysqliDAO();
-    $updt->update($employe);
+
+    try{
+        $updt->update($employe);
+    }
+    catch (DAOException $e){
+        throw new ServiceException($e->getMessage(), $e->getCode());
+    }
 
 } 
 
 public  function searchAll(){
     $researchAll=new EmployeMysqliDAO;
-    $data=$researchAll->searchAll();
+    $data=$researchAll->recherche();
     return $data;
 }
 public  function search(int $no_emp){

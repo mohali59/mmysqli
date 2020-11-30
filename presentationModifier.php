@@ -1,4 +1,7 @@
 
+<?php
+function html(){
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,12 +15,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>formulaire modifier</title>
     </head>
+<?php
+}
+function affichePageMmodif($data){
+
+    html();
+    formulaireModif($data);
+}
+
+?>
+
+<!-- j ai pris toute le form de la page modif je l ai integrer  dans la fonction "formulairemdif" -->
+<!-- j ai copier coller to_ut le header puis je l ai mis dans une fonction "html" -->
+<!-- ne pas oublier de mettre les balises phpautours des accolades -->
+<!-- j ai cree une fonction affichepagemodif qui contiens les deux fonction ci dessus  -->
+
+
+
+<?php
+function formulaireModif($data){
+    ?>
     <body>
-
-
-
-
-
 <div>
 <form action="tableau-Controller.php?action=modifier&no_emp=<?php echo $data->getNo_emp();?>" method="post">
                 
@@ -59,3 +77,6 @@
             </form>
 </div>
 </body>
+<?php
+}
+?>
